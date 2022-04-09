@@ -1,24 +1,57 @@
+<template>
+  <div class="container">
+    <Header title="Poppest Menu" />
+    <Menu :dishes="dishes" />
+  </div>
+</template>
+
+
 <script>
 import Header from "./components/Header.vue";
+import Menu from "./components/Menu.vue";
 
 export default {
   name: "App",
   components: {
     Header,
+    Menu,
+  },
+  data() {
+    return {
+      title: "Dishes",
+      showAddTask: false,
+    };
+  },
+  created() {
+    this.dishes = [
+      {
+        image: "food.jpeg",
+        title: "Spaghetti",
+        description: "Spaghetti with meatballs",
+        price: "$ 12.00",
+      },
+      {
+        image: "food.jpeg",
+        title: "Pizza",
+        description: "Pizza with cheese",
+        price: "$ 15.00",
+      },
+      {
+        image: "food.jpeg",
+        title: "Hamburger",
+        description: "Hamburger with cheese",
+        price: "$ 10.00",
+      },
+    ];
   },
 };
 </script>
 
-<template>
-  <div class="container">
-    <Header title="Menu"/>
-  </div>
-</template>
 
 
 <style>
 .container {
-  max-width: 500px;
+  max-width: 80%;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -39,22 +72,18 @@ export default {
   font-size: 15px;
   font-family: inherit;
 }
-.btn:focus {
-  outline: none;
+.btn:hover {
+  background: #fff;
+  color: #000;
 }
 .btn:active {
-  transform: scale(0.98);
-}
-.btn-block {
-  display: block;
-  width: 100%;
+  transform: scale(0.95);
 }
 
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-
   font-weight: normal;
 }
 
@@ -82,14 +111,8 @@ a,
 
 @media (min-width: 1024px) {
   body {
-    display: flex;
     place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    font-size: 150%;
   }
 
   header {
@@ -102,10 +125,6 @@ a,
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
   }
 }
 </style>
