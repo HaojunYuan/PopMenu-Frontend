@@ -1,12 +1,13 @@
 <template>
   <div class="dish">
     <div class="dish__image">
-      <img :src="'src/assets/' + dish.image" alt="Dish Image" />
+      <img :src="dish.image" alt="Dish Image" />
     </div>
     <div class="dish__content">
       <h3 class="dish__title">{{ dish.title }}</h3>
       <p class="dish__description">{{ dish.description }}</p>
       <p class="dish__price">{{ dish.price }}</p>
+      <button @click="$emit('delete-dish', dish.id)" class="btn">Delete</button>
     </div>
   </div>
 </template>

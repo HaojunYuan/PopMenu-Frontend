@@ -1,6 +1,6 @@
 <template>
   <div :key="dish.id" v-for="dish in dishes">
-    <Dish :dish="dish" />
+    <Dish @delete-dish="$emit('delete-dish', dish.id)" :dish="dish" />
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default {
   components: {
     Dish,
   },
+  emits: ["delete-dish"],
 };
 </script>
 

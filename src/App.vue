@@ -1,7 +1,10 @@
 <template>
   <div class="container">
-    <Header title="Poppest Menu" />
-    <Menu :dishes="dishes" />
+    <Header @toggle-add-dish="toggleAddDish" title="Poppest Menu" />
+    <div v-show="showAddDish">
+      <AddDish @add-dish="addDish" />
+    </div>
+    <Menu @delete-dish="deleteDish" :dishes="dishes" />
   </div>
 </template>
 
@@ -9,35 +12,55 @@
 <script>
 import Header from "./components/Header.vue";
 import Menu from "./components/Menu.vue";
+import AddDish from "./components/AddDish.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Menu,
+    AddDish,
   },
   data() {
     return {
-      title: "Dishes",
-      showAddTask: false,
+      dishes: [],
+      showAddDish: false,
     };
+  },
+  methods: {
+    toggleAddDish() {
+      this.showAddDish = !this.showAddDish;
+    },
+    addDish(newDish) {
+      this.dishes.push(newDish);
+      console.log(this.dishes);
+    },
+    deleteDish(id) {
+      if (confirm("Are you sure you want to delete this dish?")) {
+        this.dishes = this.dishes.filter((dish) => dish.id !== id);
+        console.log(this.dishes);
+      }
+    },
   },
   created() {
     this.dishes = [
       {
-        image: "food.jpeg",
+        id: 1,
+        image: "src/assets/food.jpeg",
         title: "Spaghetti",
         description: "Spaghetti with meatballs",
         price: "$ 12.00",
       },
       {
-        image: "food.jpeg",
+        id: 2,
+        image: "src/assets/food.jpeg",
         title: "Pizza",
         description: "Pizza with cheese",
         price: "$ 15.00",
       },
       {
-        image: "food.jpeg",
+        id: 3,
+        image: "src/assets/food.jpeg",
         title: "Hamburger",
         description: "Hamburger with cheese",
         price: "$ 10.00",
@@ -73,7 +96,7 @@ export default {
   font-family: inherit;
 }
 .btn:hover {
-  background: #fff;
+  background: #00c897;
   color: #000;
 }
 .btn:active {
@@ -85,15 +108,6 @@ export default {
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
-}
-
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
 }
 
 a,
@@ -116,7 +130,6 @@ a,
   }
 
   header {
-    display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }

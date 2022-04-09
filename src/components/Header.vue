@@ -1,15 +1,19 @@
 <template>
   <header>
     <h1>{{ title }}</h1>
-    <Button text="Add Dish" color="green"/>
+    <Button
+      @toggle-add-dish="$emit('toggle-add-dish')"
+      text="Add Dish"
+      color="green"
+    />
   </header>
 </template>
 
 <script>
-import Button from './Button.vue';
+import Button from "./Button.vue";
 
 export default {
-  name: 'Header',
+  name: "Header",
   props: {
     title: String,
     showAddTask: Boolean,
@@ -17,7 +21,7 @@ export default {
   components: {
     Button,
   },
-}
+};
 </script>
 
 <style scoped>
