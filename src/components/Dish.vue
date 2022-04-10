@@ -30,7 +30,7 @@ export default {
   cursor: pointer;
 }
 
-.dish__image {
-  width: 100%;
+img {
+  max-width: 100%;
 }
 </style>
