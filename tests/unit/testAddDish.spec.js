@@ -15,7 +15,7 @@ test('toggle add dish form when clicking `Add Dish` button', async () => {
   expect(wrapper.vm.showAddDish).toBe(!showAddDish)
 })
 
-test('add dish will increase the number of dishes list by 1', async () => {
+test('add a dish will increase the number of dishes list by 1', async () => {
   const wrapper = mount(App)
   const numOfDishes = wrapper.vm.dishes.length
   //Fill in the form
@@ -31,9 +31,6 @@ test('add dish will increase the number of dishes list by 1', async () => {
   await dishPrice.setValue('10')
   await dishDescription.setValue('Test Description')
   await addDishForm.trigger('submit')
-
-  console.log(wrapper.vm.dishes)
-
 
   //Check if the number of dishes has increased by 1
   expect(wrapper.vm.dishes.length).toBe(numOfDishes + 1)
