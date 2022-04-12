@@ -1,57 +1,98 @@
 <template>
-  <div class="container">
-    <Header
-      @toggle-add-dish="toggleAddDish"
-      title="Poppest Menu"
-      :showAddDish="showAddDish"
-    />
-    <div v-show="showAddDish">
-      <AddDish @add-dish="addDish" />
-    </div>
-    <Menu @edit-dish="editDish" @delete-dish="deleteDish" :dishes="dishes" />
-  </div>
+  <el-tabs type="border-card" stretch="true">
+    <el-tab-pane label="Italian">
+      <Menu
+        @add-dish="addItalianDish"
+        @edit-dish="editItalianDish"
+        @delete-dish="deleteItalianDish"
+        :dishes="italian"
+        title="Italian Food"
+      />
+    </el-tab-pane>
+    <el-tab-pane label="Mexican">
+      <Menu
+        @add-dish="addMexicanDish"
+        @edit-dish="editMexicanDish"
+        @delete-dish="deleteMexicanDish"
+        :dishes="mexican"
+        title="Mexican Food"
+      />
+    </el-tab-pane>
+    <el-tab-pane label="Chinese">
+      <Menu
+        @add-dish="addChineseDish"
+        @edit-dish="editChineseDish"
+        @delete-dish="deleteChineseDish"
+        :dishes="chinese"
+        title="Chinese Food"
+      />
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 
 <script>
-import Header from "./components/Header.vue";
 import Menu from "./components/Menu.vue";
-import AddDish from "./components/AddDish.vue";
 
 export default {
   name: "App",
   components: {
-    Header,
     Menu,
-    AddDish,
   },
   data() {
     return {
-      dishes: [],
-      showAddDish: false,
+      italian: [],
+      mexican: [],
+      chinese: [],
     };
   },
   methods: {
-    toggleAddDish() {
-      this.showAddDish = !this.showAddDish;
+    //Methods for italian dishes
+    addItalianDish(newDish) {
+      this.italian.push(newDish);
     },
-    addDish(newDish) {
-      this.dishes.push(newDish);
-      console.log(this.dishes);
+
+    editItalianDish(editedDish) {
+      const index = this.italian.findIndex((dish) => dish.id === editedDish.id);
+      this.italian[index] = editedDish;
     },
-    editDish(editedDish) {
-      const index = this.dishes.findIndex((dish) => dish.id === editedDish.id);
-      this.dishes[index] = editedDish;
-    },
-    deleteDish(id) {
+
+    deleteItalianDish(id) {
       if (confirm("Are you sure you want to delete this dish?")) {
-        this.dishes = this.dishes.filter((dish) => dish.id !== id);
-        console.log(this.dishes);
+        this.italian = this.italian.filter((dish) => dish.id !== id);
+      }
+    },
+    //Methods for mexican dishes
+    addMexicanDish(newDish) {
+      this.mexican.push(newDish);
+    },
+    editMexicanDish(editedDish) {
+      const index = this.mexican.findIndex((dish) => dish.id === editedDish.id);
+      this.mexican[index] = editedDish;
+    },
+    deleteMexicanDish(id) {
+      if (confirm("Are you sure you want to delete this dish?")) {
+        this.mexican = this.mexican.filter((dish) => dish.id !== id);
+      }
+    },
+
+    //Methods for chinese dishes
+    addChineseDish(newDish) {
+      this.chinese.push(newDish);
+    },
+    editChineseDish(editedDish) {
+      const index = this.chinese.findIndex((dish) => dish.id === editedDish.id);
+      this.chinese[index] = editedDish;
+    },
+    deleteChineseDish(id) {
+      if (confirm("Are you sure you want to delete this dish?")) {
+        this.chinese = this.chinese.filter((dish) => dish.id !== id);
       }
     },
   },
+
   created() {
-    this.dishes = [
+    this.italian = [
       {
         id: 1,
         image:
@@ -74,6 +115,58 @@ export default {
           "https://static01.nyt.com/images/2022/04/06/dining/06rest-mena1/05rest-mena1-threeByTwoMediumAt2X.jpg",
         title: "Hamburger",
         description: "Hamburger with cheese",
+        price: "$ 10.00",
+      },
+    ];
+    this.mexican = [
+      {
+        id: 1,
+        image:
+          "https://www.ajc.com/resizer/ItGrzbOTwKS2-PFKi74Bqj7IYkM=/814x458/cloudfront-us-east-1.images.arcpublishing.com/ajc/KQISFSSYQVHAFPG4FDUWKD2NAA.jpg",
+        title: "Tacos",
+        description: "Tacos with cheese",
+        price: "$ 12.00",
+      },
+      {
+        id: 2,
+        image:
+          "https://www.ajc.com/resizer/ItGrzbOTwKS2-PFKi74Bqj7IYkM=/814x458/cloudfront-us-east-1.images.arcpublishing.com/ajc/KQISFSSYQVHAFPG4FDUWKD2NAA.jpg",
+        title: "Burrito",
+        description: "Burrito with cheese",
+        price: "$ 15.00",
+      },
+      {
+        id: 3,
+        image:
+          "https://www.ajc.com/resizer/ItGrzbOTwKS2-PFKi74Bqj7IYkM=/814x458/cloudfront-us-east-1.images.arcpublishing.com/ajc/KQISFSSYQVHAFPG4FDUWKD2NAA.jpg",
+        title: "Quesadilla",
+        description: "Quesadilla with cheese",
+        price: "$ 10.00",
+      },
+    ];
+    this.chinese = [
+      {
+        id: 1,
+        image:
+          "https://imgcache.dealmoon.com/thumbimg.dealmoon.com/dealmoon/260/d51/e1e/a4f2f5658622fb03654fb2f.jpg_1280_1280_3_bb7b.jpg",
+        title: "Spring Rolls",
+        description: "Spring Rolls with cheese",
+        price: "$ 12.00",
+      },
+      {
+        id: 2,
+        image:
+          "https://imgcache.dealmoon.com/thumbimg.dealmoon.com/dealmoon/260/d51/e1e/a4f2f5658622fb03654fb2f.jpg_1280_1280_3_bb7b.jpg",
+        title: "Peking Duck",
+        description: "Peking Duck with cheese",
+        price: "$ 15.00",
+      },
+      {
+        id: 3,
+        image:
+          "https://imgcache.dealmoon.com/thumbimg.dealmoon.com/dealmoon/260/d51/e1e/a4f2f5658622fb03654fb2f.jpg_1280_1280_3_bb7b.jpg",
+        title: "Shrimp Dumplings",
+        description: "Shrimp Dumplings with cheese",
         price: "$ 10.00",
       },
     ];

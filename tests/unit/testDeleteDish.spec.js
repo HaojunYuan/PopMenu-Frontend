@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import App from '@/App.vue'
-import Menu from '@/components/Menu.vue'
+import Dishes from '@/components/Dishes.vue'
 import Dish from '@/components/Dish.vue'
 
 
@@ -9,10 +9,10 @@ test('delete a dish will decrease the number of dishes list by 1', async () => {
 
     const wrapper = mount(App)
     const numOfDishes = wrapper.vm.dishes.length
-    const menu = wrapper.findComponent(Menu)
+    const dishes = wrapper.findComponent(Dishes)
     //Choose a random dish from menu and click on delete button
     const randomIndex = Math.floor(Math.random() * wrapper.vm.dishes.length)
-    const dish = menu.findAllComponents(Dish).at(randomIndex)
+    const dish = dishes.findAllComponents(Dish).at(randomIndex)
     const deleteButton = dish.findAll('button').at(1)
     await deleteButton.trigger('click')
     //Expect a confirmation dialog to appear
