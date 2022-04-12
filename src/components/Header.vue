@@ -3,8 +3,8 @@
     <h1>{{ title }}</h1>
     <Button
       @toggle-add-dish="$emit('toggle-add-dish')"
-      text="Add Dish"
-      color="green"
+      :text="showAddDish ? 'Close' : 'Add Dish'"
+      :color="showAddDish ? 'red' : 'green'"
     />
   </header>
 </template>
@@ -16,7 +16,7 @@ export default {
   name: "Header",
   props: {
     title: String,
-    showAddTask: Boolean,
+    showAddDish: Boolean,
   },
   components: {
     Button,

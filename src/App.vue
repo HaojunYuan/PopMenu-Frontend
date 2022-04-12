@@ -1,10 +1,14 @@
 <template>
   <div class="container">
-    <Header @toggle-add-dish="toggleAddDish" title="Poppest Menu" />
+    <Header
+      @toggle-add-dish="toggleAddDish"
+      title="Poppest Menu"
+      :showAddDish="showAddDish"
+    />
     <div v-show="showAddDish">
       <AddDish @add-dish="addDish" />
     </div>
-    <Menu @delete-dish="deleteDish" :dishes="dishes" />
+    <Menu @edit-dish="editDish" @delete-dish="deleteDish" :dishes="dishes" />
   </div>
 </template>
 
@@ -35,6 +39,10 @@ export default {
       this.dishes.push(newDish);
       console.log(this.dishes);
     },
+    editDish(editedDish) {
+      const index = this.dishes.findIndex((dish) => dish.id === editedDish.id);
+      this.dishes[index] = editedDish;
+    },
     deleteDish(id) {
       if (confirm("Are you sure you want to delete this dish?")) {
         this.dishes = this.dishes.filter((dish) => dish.id !== id);
@@ -46,21 +54,24 @@ export default {
     this.dishes = [
       {
         id: 1,
-        image: "src/assets/food.jpeg",
+        image:
+          "https://static01.nyt.com/images/2022/04/06/dining/06rest-mena1/05rest-mena1-threeByTwoMediumAt2X.jpg",
         title: "Spaghetti",
         description: "Spaghetti with meatballs",
         price: "$ 12.00",
       },
       {
         id: 2,
-        image: "src/assets/food.jpeg",
+        image:
+          "https://static01.nyt.com/images/2022/04/06/dining/06rest-mena1/05rest-mena1-threeByTwoMediumAt2X.jpg",
         title: "Pizza",
         description: "Pizza with cheese",
         price: "$ 15.00",
       },
       {
         id: 3,
-        image: "src/assets/food.jpeg",
+        image:
+          "https://static01.nyt.com/images/2022/04/06/dining/06rest-mena1/05rest-mena1-threeByTwoMediumAt2X.jpg",
         title: "Hamburger",
         description: "Hamburger with cheese",
         price: "$ 10.00",

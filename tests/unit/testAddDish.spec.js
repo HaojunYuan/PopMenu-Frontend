@@ -28,11 +28,18 @@ test('add a dish will increase the number of dishes list by 1', async () => {
 
   await dishImage.setValue('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png')
   await dishName.setValue('Test Dish')
-  await dishPrice.setValue('10')
+  await dishPrice.setValue('$ 10')
   await dishDescription.setValue('Test Description')
   await addDishForm.trigger('submit')
 
   //Check if the number of dishes has increased by 1
   expect(wrapper.vm.dishes.length).toBe(numOfDishes + 1)
+
+  //Check the new dish
+  const newDish = wrapper.vm.dishes[numOfDishes]
+  expect(newDish.title).toBe('Test Dish')
+  expect(newDish.price).toBe("$ 10")
+  expect(newDish.description).toBe('Test Description')
+  expect(newDish.image).toBe('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png')
 
 })

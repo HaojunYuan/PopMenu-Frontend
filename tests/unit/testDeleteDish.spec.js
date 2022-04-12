@@ -13,7 +13,7 @@ test('delete a dish will decrease the number of dishes list by 1', async () => {
     //Choose a random dish from menu and click on delete button
     const randomIndex = Math.floor(Math.random() * wrapper.vm.dishes.length)
     const dish = menu.findAllComponents(Dish).at(randomIndex)
-    const deleteButton = dish.find('button')
+    const deleteButton = dish.findAll('button').at(1)
     await deleteButton.trigger('click')
     //Expect a confirmation dialog to appear
     expect(global.confirm).toHaveBeenCalledWith('Are you sure you want to delete this dish?')
