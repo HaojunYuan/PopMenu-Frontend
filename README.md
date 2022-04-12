@@ -1,6 +1,6 @@
 # PopMenu Frontend Assessment
 
-This template should help get you started developing with Vue 3 in Vite.
+Welcome to the poppest menu!
 
 ## Recommended IDE Setup
 
@@ -22,13 +22,15 @@ npm install
 npm run dev
 ```
 
+### Run jest
+```sh
+npm run test:unit
+```
+
 ### Compile and Minify for Production
 
 ```sh
 npm run build
 ```
 
-### Run jest
-```sh
-npm run test:unit
-```
+
